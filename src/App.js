@@ -8,6 +8,7 @@ function App() {
       <div class="center">
         <div class="column">
           <Button variant="contained">Test no 1</Button>
+          <Button variant="contained">Test no 2</Button>
         </div>
       </div>
     </div>
