@@ -1,0 +1,42 @@
+div.background {
+  background-color: black;
+  color: white;
+
+  width: 100%;
+}
+
+div.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+}
+
+div.wrapper {
+  background-color: grey;
+
+  border-radius: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30%;
+  height: 50vh;
+}
+
+div.column {
+  display: flex;
+  flex-direction: column;
+}
+
+div.row {
+  display: flex;
+  flex-direction: row;
+}
+
+div.margin {
+  margin: 5px;
+  padding: 5px;
+}
