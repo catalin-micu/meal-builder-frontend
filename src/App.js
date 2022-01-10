@@ -1,9 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { Button } from "@material-ui/core";
 
 function App() {
   return (
-    <div className="App">TEST</div>
+    <div class="background">
+      <div class="center">
+        <div class="column">
+          <Button variant="contained">Test no 1</Button>
+        </div>
+      </div>
+    </div>
   );
 }
 
