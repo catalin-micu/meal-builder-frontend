@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-
-import "./Login.css";
+import "../css/Register.css";
 
 import styled from "styled-components";
 
@@ -13,17 +11,6 @@ const MarginX = styled.div`
 `;
 
 function Login(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  function consoleLogInfo() {
-    setUsername(document.getElementById("username-field").value);
-    setPassword(document.getElementById("password-field").value);
-
-    console.log(username);
-    console.log(password);
-  }
-
   return (
     <div class="background">
       <div class="center">
@@ -32,27 +19,27 @@ function Login(props) {
             <div class="header">Meal Builder</div>
             <MarginX value="10px">
               <TextField
-                id="username-field"
+                id="outlined-basic"
                 label="Username"
                 variant="outlined"
               />
             </MarginX>
             <MarginX value="10px">
+              <TextField id="outlined-basic" label="Email" variant="outlined" />
+            </MarginX>
+            <MarginX value="10px">
               <TextField
-                id="password-field"
+                id="outlined-basic"
                 label="Password"
                 variant="outlined"
-                password
               />
             </MarginX>
             <div class="row">
               <MarginX value="30px">
-                <Button variant="contained" onClick={consoleLogInfo}>
-                  Login
-                </Button>
+                <Button variant="contained">Register</Button>
               </MarginX>
               <MarginX value="30px">
-                <Button variant="contained">Register</Button>
+                <Button variant="contained">Login</Button>
               </MarginX>
             </div>
           </div>

@@ -1,8 +1,10 @@
-import "./Register.css";
-
+import React, { useState } from "react";
+import "../css/Login.css";
 import styled from "styled-components";
-
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
+import CustomButton from "../components/CustomButton";
+import { green } from "@material-ui/core/colors";
+import { createTheme } from '@material-ui/core/styles';
 
 const MarginX = styled.div`
   margin-top: ${(props) => props.value};
@@ -10,7 +12,24 @@ const MarginX = styled.div`
   margin-left: auto;
 `;
 
+const theme = createTheme({
+  palette: {
+    primary: green
+  },
+});
+
 function Login(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function consoleLogInfo() {
+    setUsername(document.getElementById("username-field").value);
+    setPassword(document.getElementById("password-field").value);
+
+    console.log(username);
+    console.log(password);
+  }
+
   return (
     <div class="background">
       <div class="center">
@@ -19,27 +38,25 @@ function Login(props) {
             <div class="header">Meal Builder</div>
             <MarginX value="10px">
               <TextField
-                id="outlined-basic"
+                id="username-field"
                 label="Username"
                 variant="outlined"
               />
             </MarginX>
             <MarginX value="10px">
-              <TextField id="outlined-basic" label="Email" variant="outlined" />
-            </MarginX>
-            <MarginX value="10px">
               <TextField
-                id="outlined-basic"
+                id="password-field"
                 label="Password"
                 variant="outlined"
+                password
               />
             </MarginX>
             <div class="row">
               <MarginX value="30px">
-                <Button variant="contained">Register</Button>
+              <CustomButton text='Log in' color="secondary" theme={theme} url="/login" />
               </MarginX>
               <MarginX value="30px">
-                <Button variant="contained">Login</Button>
+              <CustomButton text='Sign up' color="primary" theme={theme} url="/register" />
               </MarginX>
             </div>
           </div>
