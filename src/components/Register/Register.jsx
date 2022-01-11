@@ -4,38 +4,43 @@ import styled from "styled-components";
 
 import { Button, TextField } from "@material-ui/core";
 
+const MarginX = styled.div`
+  margin-top: ${(props) => props.value};
+  margin-left: auto;
+  margin-left: auto;
+`;
+
 function Login(props) {
   return (
     <div class="background">
       <div class="center">
         <div class="wrapper">
           <div class="column">
-            <div class="margin">
+            <div class="header">Meal Builder</div>
+            <MarginX value="10px">
               <TextField
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
               />
-            </div>
-
-            <div class="margin">
+            </MarginX>
+            <MarginX value="10px">
               <TextField id="outlined-basic" label="Email" variant="outlined" />
-            </div>
-
-            <div class="margin">
+            </MarginX>
+            <MarginX value="10px">
               <TextField
                 id="outlined-basic"
                 label="Password"
                 variant="outlined"
               />
-            </div>
+            </MarginX>
             <div class="row">
-              <div class="margin">
+              <MarginX value="30px">
                 <Button variant="contained">Register</Button>
-              </div>
-              <div class="margin">
+              </MarginX>
+              <MarginX value="30px">
                 <Button variant="contained">Login</Button>
-              </div>
+              </MarginX>
             </div>
           </div>
         </div>

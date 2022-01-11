@@ -1,5 +1,5 @@
 div.background {
-  background-color: black;
+  background-color: #7a7d7d;
   color: white;
 
   width: 100%;
@@ -14,7 +14,7 @@ div.center {
 }
 
 div.wrapper {
-  background-color: grey;
+  background-color: #fffbfe;
 
   border-radius: 7px;
 
@@ -23,7 +23,20 @@ div.wrapper {
   justify-content: center;
 
   width: 30%;
-  height: 50vh;
+  height: 60vh;
+}
+
+div.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: black;
+
+  margin-bottom: 20px;
+
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: x-large;
 }
 
 div.column {
@@ -37,6 +50,6 @@ div.row {
 }
 
 div.margin {
-  margin: 10px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
 }
