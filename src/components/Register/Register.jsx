@@ -6,7 +6,7 @@ import { Button, TextField } from "@material-ui/core";
 
 const MarginX = styled.div`
   margin-top: ${(props) => props.value};
-  margin-left: auto;
+  margin-right: auto;
   margin-left: auto;
 `;
 
