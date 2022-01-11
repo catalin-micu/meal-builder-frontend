@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/HomePage.css"
-import { Grid, ButtonGroup } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer";
 import { red, green } from "@material-ui/core/colors";
@@ -20,14 +20,13 @@ const HomePage = () => {
             <div className="homepage">
               <div className="homepageButtonGroup">
                 <img src={logo} className="App-logo" alt="logo" />
+                <br />
                 <Grid item xs={12} spacing={6} align="center">
-                    <ButtonGroup disableElevation>
-                        <CustomButton text='Sign up' color="primary" theme={theme} path="/register" />
-                        <CustomButton text='Log in' color="secondary" theme={theme} path="/login" />
-                    </ButtonGroup>
+                    <CustomButton text='Sign up' color="primary" theme={theme} path="/register" />
+                    <CustomButton text='Log in' color="secondary" theme={theme} path="/login" />
                 </Grid>
               </div>
-              <p style={{ lineHeight: "300px"}}>
+              <p style={{ lineHeight: "250px"}}>
                 <br/>
                 <Footer />
               </p>

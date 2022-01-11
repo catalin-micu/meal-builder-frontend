@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  margin: {
+  root: {
     margin: theme.spacing(1),
+    border: '1.5px solid'
   },
 }));
 
@@ -20,8 +21,8 @@ export default function CustomButton(props) {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Button variant="outlined" color={ color } className={classes.margin} component={ Link } to={ url } onClick={ action }>
-          { text }
+        <Button variant="outlined" color={ color } className={classes.root} component={ Link } to={ url } onClick={ action }>
+          <strong> { text } </strong>
         </Button>
       </ThemeProvider>
     </div>
