@@ -22,8 +22,8 @@ const Login = () => {
         setUsername(document.getElementById("email-field").value);
         setPassword(document.getElementById("password-field").value);
 
-        console.log(username);
-        console.log(password);
+        console.log(document.getElementById("email-field").value);
+        console.log(document.getElementById("password-field").value);
     }
   
     return (
