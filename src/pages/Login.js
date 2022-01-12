@@ -42,30 +42,21 @@ const Login = () => {
 
   function onUsernameChange() {
     setUsername(document.getElementById("email-field").value);
-    //console.log(username);
   }
 
   function onPasswordChange() {
     setPassword(document.getElementById("password-field").value);
-    //console.log(password);
   }
 
   function onClickLogin() {
-    let hash = require("password-hash");
-    let passhash = hash.generate("parola1");
-    console.log(passhash);
-
-    //console.log(username);
-    //console.log(password);
-
-    let re1 = /\S+@\S+\.\S+/;
+    let reUsername = /\S+@\S+\.\S+/;
 
     if (username.length == 0) {
       setUsernameHelper("Email cannot be empty");
       return;
     }
 
-    if (re1.test(username) == false) {
+    if (reUsername.test(username) == false) {
       setUsernameHelper("Invalid Email");
       return;
     }
@@ -185,7 +176,7 @@ const Login = () => {
                   register
                 </a>
               </strong>{" "}
-              page !
+              page!
             </text>
           </Grid>
         </Grid>
