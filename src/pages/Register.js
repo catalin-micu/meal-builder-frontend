@@ -6,6 +6,11 @@ import Footer from "../components/Footer";
 import { green } from "@material-ui/core/colors";
 import { createTheme } from "@material-ui/core/styles";
 import logo from "../logo.jpeg";
+import { useHistory } from "react-router-dom";
+
+import { IconButton } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
 
 const theme = createTheme({
   palette: {
@@ -25,6 +30,10 @@ const Register = () => {
   const [phoneHelper, setPhoneHelper] = React.useState("");
   const [passwordHelper, setPasswordHelper] = React.useState("");
   const [passwordConfHelper, setPasswordConfHelper] = React.useState("");
+
+  const [signupError, setSignupError] = React.useState("");
+
+  const history = useHistory();
 
   function clearErrors() {
     setNameHelper("");
@@ -55,6 +64,8 @@ const Register = () => {
   }
 
   function onClickSignUp() {
+    clearErrors();
+
     let reName = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
     let reEmail = /\S+@\S+\.\S+/;
     let rePhone =
@@ -112,7 +123,29 @@ const Register = () => {
 
     if (password != passwordConf) {
       setPasswordConfHelper("Passwords do not match");
+      return;
     }
+
+    let data1 = {
+      email: email,
+      passwd: password,
+      full_name: name,
+      phone_number: phone,
+    };
+
+    console.log(data1);
+
+    fetch("http://127.0.0.1:5000/users/sign-up", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data1),
+    }).then((response) => {
+      if (response.status == "200") {
+        history.push("/");
+      } else {
+        setSignupError(true);
+      }
+    });
   }
 
   return (
@@ -133,6 +166,33 @@ const Register = () => {
             </a>
             <br />
           </Grid>
+
+          <Grid item xs={12} spacing={6} align="center">
+            {signupError ? (
+              <Alert
+                severity="error"
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setSignupError(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mb: 2 }}
+                style={{
+                  borderRadius: "10px",
+                }}
+              >
+                <strong>Error creating user</strong>
+              </Alert>
+            ) : null}
+          </Grid>
+
           <Grid item xs={12} spacing={6} align="center">
             <TextField
               id="fullname-field"
@@ -144,7 +204,7 @@ const Register = () => {
                 onNameChange();
               }}
               helperText={nameHelper}
-              error={nameHelper.length == 0 ? false : true}
+              error={signupError || (nameHelper.length == 0 ? false : true)}
             />
           </Grid>
           <Grid item xs={12} spacing={6} align="center">
@@ -158,7 +218,7 @@ const Register = () => {
                 onEmailChange();
               }}
               helperText={emailHelper}
-              error={emailHelper.length == 0 ? false : true}
+              error={signupError || (emailHelper.length == 0 ? false : true)}
             />
           </Grid>
           <Grid item xs={12} spacing={6} align="center">
@@ -172,7 +232,7 @@ const Register = () => {
                 onPhoneChange();
               }}
               helperText={phoneHelper}
-              error={phoneHelper.length == 0 ? false : true}
+              error={signupError || (phoneHelper.length == 0 ? false : true)}
             />
           </Grid>
           <Grid item xs={12} spacing={6} align="center">
@@ -188,6 +248,7 @@ const Register = () => {
               }}
               helperText={passwordHelper}
               error={
+                signupError ||
                 passwordConfHelper == "Passwords do not match" ||
                 (passwordHelper.length == 0 ? false : true)
               }
@@ -205,7 +266,9 @@ const Register = () => {
                 onPasswordConfChange();
               }}
               helperText={passwordConfHelper}
-              error={passwordConfHelper.length == 0 ? false : true}
+              error={
+                signupError || (passwordConfHelper.length == 0 ? false : true)
+              }
             />
           </Grid>
           <Grid item xs={12} spacing={6} align="center">

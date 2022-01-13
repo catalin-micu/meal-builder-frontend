@@ -7,14 +7,9 @@ import Dots from "../components/Dots";
 import { green } from "@material-ui/core/colors";
 import { createTheme } from "@material-ui/core/styles";
 import logo from "../logo.jpeg";
+import { useHistory } from "react-router-dom";
 
-import {
-  Typography,
-  IconButton,
-  BottomNavigation,
-  Collapse,
-  Box,
-} from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -39,6 +34,8 @@ const Login = () => {
   const [invalidCredentials, setInvalidCredentials] = React.useState(false);
 
   const [open, setOpen] = React.useState(false);
+
+  const history = useHistory();
 
   function onUsernameChange() {
     setUsername(document.getElementById("email-field").value);
@@ -68,15 +65,27 @@ const Login = () => {
       return;
     }
 
-    //check against stored data
-    if (true) {
-      setPasswordHelper("");
-      setInvalidCredentials(true);
-      return;
-    }
-
     setPasswordHelper("");
     setButtonText("Hello there");
+
+    let data1 = {
+      email: username,
+      passwd: password,
+    };
+
+    console.log(data1);
+
+    fetch("http://127.0.0.1:5000/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data1),
+    }).then((response) => {
+      if (response.status == "200") {
+        history.push("/");
+      } else {
+        setInvalidCredentials(true);
+      }
+    });
   }
 
   return (
