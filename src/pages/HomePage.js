@@ -17,7 +17,7 @@ const theme = createTheme({
 
 const HomePage = () => {
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <div className="flexbox-container">
         <div className="flexbox-item flexbox-item-1">
           <img className="homeImage" src={homepage_photo} alt="homepage" />
