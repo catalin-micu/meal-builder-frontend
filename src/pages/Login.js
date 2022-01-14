@@ -257,7 +257,7 @@ const Login = () => {
               text="Log in"
               color="primary"
               theme={theme}
-              url="/login"
+              url="/dashboard"
               onClick={() => {
                 consoleLogInfo();
               }}
