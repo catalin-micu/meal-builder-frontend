@@ -138,6 +138,8 @@ export default function Dashboard() {
         })}
       >
         <div className={classes.drawerHeader} />
+
+        <DropdownButton />
       </main>
       <Drawer
         className={classes.drawer}
@@ -159,11 +161,6 @@ export default function Dashboard() {
         </div>
         <Divider />
       </Drawer>
-      <Grid>
-        <Grid item xs={12} spacing={6}>
-          <DropdownButton />
-        </Grid>
-      </Grid>
     </Box>
   );
 }

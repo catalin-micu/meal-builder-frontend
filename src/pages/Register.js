@@ -1,16 +1,23 @@
 import React from "react";
+<<<<<<< HEAD
 import "../css/HomePage.css";
+=======
+import "../css/Register.css";
+>>>>>>> 05ce1a4 (fixed register and login designs)
 import { Grid, TextField } from "@material-ui/core";
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer";
 import { green } from "@material-ui/core/colors";
 import { createTheme } from "@material-ui/core/styles";
 import logo from "../logo.jpeg";
+<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
 
 import { IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
+=======
+>>>>>>> 05ce1a4 (fixed register and login designs)
 
 const theme = createTheme({
   palette: {
@@ -19,6 +26,7 @@ const theme = createTheme({
 });
 
 const Register = () => {
+<<<<<<< HEAD
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
@@ -300,4 +308,111 @@ const Register = () => {
   );
 };
 
+=======
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  function consoleLogInfo() {
+    setUsername(document.getElementById("email-field").value);
+    setPassword(document.getElementById("password-field").value);
+
+    console.log(username);
+    console.log(password);
+  }
+
+  return (
+    <div className="register">
+      <div className="registerFieldGroup">
+        <Grid
+          container
+          spacing={2}
+          style={{
+            width: "100%",
+            boxShadow: "-5px 5px 6px 6px #695f55",
+            borderRadius: "10px",
+          }}
+        >
+          <Grid item xs={12} spacing={6} align="center">
+            <a href="/">
+              <img src={logo} className="App-logo" alt="logo" />
+            </a>
+            <br />
+          </Grid>
+          <Grid item xs={12} spacing={6} align="center">
+            <TextField
+              id="fullname-field"
+              color="secondary"
+              label="Full name"
+              variant="outlined"
+              required="true"
+            />
+          </Grid>
+          <Grid item xs={12} spacing={6} align="center">
+            <TextField
+              id="email-field"
+              color="secondary"
+              label="E-mail"
+              variant="outlined"
+              required="true"
+            />
+          </Grid>
+          <Grid item xs={12} spacing={6} align="center">
+            <TextField
+              id="phone-field"
+              color="secondary"
+              label="Phone number"
+              variant="outlined"
+              required="true"
+            />
+          </Grid>
+          <Grid item xs={12} spacing={6} align="center">
+            <TextField
+              id="password-field"
+              color="secondary"
+              label="Password"
+              variant="outlined"
+              type="password"
+              required="true"
+            />
+          </Grid>
+          <Grid item xs={12} spacing={6} align="center">
+            <TextField
+              id="cpassword-field"
+              color="secondary"
+              label="Password confirmation"
+              variant="outlined"
+              type="password"
+              required="true"
+            />
+          </Grid>
+          <Grid item xs={12} spacing={6} align="center">
+            <CustomButton
+              text="Sign up"
+              color="primary"
+              theme={theme}
+              onClick={() => {
+                consoleLogInfo();
+              }}
+            />
+            <text style={{ fontSize: "12px", color: "#695f55" }}>
+              If you already have an account, go to{" "}
+              <strong>
+                <a href="/login" style={{ color: "red" }}>
+                  login
+                </a>
+              </strong>{" "}
+              page !
+            </text>
+          </Grid>
+        </Grid>
+      </div>
+      <p style={{ lineHeight: "13vh" }}>
+        <br />
+        <Footer />
+      </p>
+    </div>
+  );
+};
+
+>>>>>>> 05ce1a4 (fixed register and login designs)
 export default Register;
