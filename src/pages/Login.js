@@ -66,7 +66,6 @@ const Login = () => {
     }
 
     setPasswordHelper("");
-    setButtonText("Hello there");
 
     let data1 = {
       email: username,
@@ -81,6 +80,7 @@ const Login = () => {
       body: JSON.stringify(data1),
     }).then((response) => {
       if (response.status == "200") {
+        setButtonText("Hello there");
         history.push("/");
       } else {
         setInvalidCredentials(true);
