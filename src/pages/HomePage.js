@@ -31,13 +31,13 @@ const HomePage = () => {
                 text="Sign up"
                 color="primary"
                 theme={theme}
-                path="/register"
+                url="/register"
               />
               <CustomButton
                 text="Log in"
                 color="secondary"
                 theme={theme}
-                path="/login"
+                url="/login"
               />
             </Grid>
             <Grid item xs={12} spacing={6} align="center">
