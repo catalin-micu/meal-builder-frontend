@@ -1,5 +1,6 @@
 import "./App.css";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Register from "./pages/Register";
@@ -10,11 +11,15 @@ import ErrorMessage from "./pages/ErrorMessage";
 function App() {
 =======
 import { makeStyles } from "@material-ui/core/styles";
+=======
+>>>>>>> 78459ed (fixed the error message for invalid pages)
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
+import ErrorMessage from "./pages/ErrorMessage";
 
 function App() {
+<<<<<<< HEAD
   const useStyles = makeStyles((theme) => ({
     root: {
       fontFamily: "Garamond",
@@ -31,6 +36,8 @@ function App() {
   };
 
 >>>>>>> 4a3d4c8 (modified homepage and started working on dashboard)
+=======
+>>>>>>> 78459ed (fixed the error message for invalid pages)
   return (
     <Router>
       <div className="App">
@@ -44,8 +51,12 @@ function App() {
 =======
           <Route path="/home" component={HomePage} />
           <Route path="/dashboard" component={Dashboard} />
+<<<<<<< HEAD
           <Route path="*">{errorMessage}</Route>
 >>>>>>> 4a3d4c8 (modified homepage and started working on dashboard)
+=======
+          <Route path="*" component={ErrorMessage} />
+>>>>>>> 78459ed (fixed the error message for invalid pages)
         </Switch>
       </div>
     </Router>
