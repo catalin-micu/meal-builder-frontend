@@ -11,11 +11,13 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import logo from "../logo2.png";
 import DropdownButton from "../components/DropdownButton";
+import BasicTable from "../components/BasicTable";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    minHeight: "100vh",
     display: "flex",
   },
   appBar: {
@@ -90,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
   },
+  dropDwnDiv: {
+    textAlign: "center",
+  },
 }));
 
 export default function Dashboard() {
@@ -138,8 +143,10 @@ export default function Dashboard() {
         })}
       >
         <div className={classes.drawerHeader} />
-
-        <DropdownButton />
+        <div className={classes.dropDwnDiv}>
+          <DropdownButton />
+        </div>
+        <BasicTable />
       </main>
       <Drawer
         className={classes.drawer}
@@ -158,6 +165,15 @@ export default function Dashboard() {
               <ChevronRightIcon className={classes.chevron} />
             )}
           </IconButton>
+          <text
+            style={{
+              fontFamily: "Georgia",
+              fontSize: "16px",
+              color: "#695f55",
+            }}
+          >
+            &emsp;&emsp;&ensp;Profile{" "}
+          </text>
         </div>
         <Divider />
       </Drawer>
