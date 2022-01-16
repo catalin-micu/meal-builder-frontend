@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import RestaurantPage from "./pages/RestaurantPage";
 import React from "react";
 
 function App() {
@@ -31,7 +32,11 @@ function App() {
           <Route path="/dashboard/:userEmail" component={Dashboard} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="*">{errorMessage}</Route>
+          <Route
+            path="/restaurant/:restaurantName"
+            component={RestaurantPage}
+          />
+          <Route path="/*">{errorMessage}</Route>
         </Switch>
       </div>
     </Router>
