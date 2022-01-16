@@ -26,6 +26,9 @@ const useStyles = makeStyles(() => ({
   },
   dropDwnBtn: {
     backgroundColor: "#b5a596",
+    "&:hover": {
+      backgroundColor: "#ccbcad",
+    },
   },
 }));
 
@@ -69,13 +72,6 @@ const TriggerMenu = () => {
             <text className={classes.menuText}>{address}</text>
           </MenuItem>
         ))}
-        {/* <MenuItem
-          onClick={() => {
-            handleButtonText("Str. Sergent Ilie Petre 102, bl.1, ap.25");
-          }}
-        >
-          Str. Sergent Ilie Petre 102, bl.1, ap.25
-        </MenuItem> */}
         <MenuItem onClick={popupState.close}>
           <text className={classes.menuText}>+ Add new address</text>
         </MenuItem>

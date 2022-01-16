@@ -7,10 +7,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(1),
     border: "1.5px solid",
+    fontFamily: "Georgia",
+    fontSize: "11px",
   },
 }));
 
-export default function CustomButton(props) {
+export default function OnProfileButton(props) {
   var text = props.text;
   var color = props.color;
   var url = props.url;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme, createTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,6 +12,9 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import logo from "../logo2.png";
 import DropdownButton from "../components/DropdownButton";
 import BasicTable from "../components/BasicTable";
+import OnProfileButton from "../components/OnProfileButton";
+import { green } from "@material-ui/core/colors";
+import Footer from "../components/Footer";
 
 const drawerWidth = 240;
 
@@ -54,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    background: "transparent",
+    backgroundColor: "#f7f7f7",
     boxShadow: "none",
   },
   drawerHeader: {
@@ -92,15 +95,44 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
   },
+  headerBox: {
+    display: "flex",
+    justifyContent: "space-around",
+    paddingTop: "20px",
+    paddingBottom: "50px",
+  },
   dropDwnDiv: {
     textAlign: "center",
   },
+  title2: {
+    color: "#695f55",
+    fontFamily: "Times New Roman",
+    fontSize: "26px",
+  },
+  fName: {
+    color: "#eea42b",
+  },
+  cAddress: {
+    color: "#695f55",
+    fontFamily: "Times New Roman",
+    fontSize: "14px",
+  },
+  footer: {
+    marginTop: "160px",
+  },
 }));
+
+const cTheme = createTheme({
+  palette: {
+    primary: green,
+  },
+});
 
 export default function Dashboard() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [fullName, setFullName] = useState("Razvan Bornac");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -133,7 +165,7 @@ export default function Dashboard() {
             onClick={handleDrawerOpen}
             className={clsx(open && classes.hide)}
           >
-            <AccountCircleIcon style={{ color: "#695f55" }} />
+            <AccountCircleIcon style={{ color: "#cd4f52" }} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -143,10 +175,21 @@ export default function Dashboard() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <div className={classes.dropDwnDiv}>
-          <DropdownButton />
+        <div className={classes.headerBox}>
+          <div>
+            <text className={classes.title2}>
+              Welcome, <text className={classes.fName}>{fullName}</text> !
+            </text>
+          </div>
+          <div className={classes.dropDwnDiv}>
+            <text className={classes.cAddress}>Current city:</text>
+            <DropdownButton />
+          </div>
         </div>
         <BasicTable />
+        <div className={classes.footer}>
+          <Footer />
+        </div>
       </main>
       <Drawer
         className={classes.drawer}
@@ -176,6 +219,21 @@ export default function Dashboard() {
           </text>
         </div>
         <Divider />
+        <Grid container spacing={3}>
+          <Grid item xs={12} spacing={6} align="center" />
+          <Grid item xs={12} spacing={6} align="center">
+            <text className={classes.cAddress}>Hello,</text>
+            <Typography className={classes.fName}>{fullName}</Typography>
+          </Grid>
+          <Grid item xs={12} spacing={6} align="center">
+            <OnProfileButton
+              text="Account details"
+              color="primary"
+              theme={cTheme}
+            />
+            <OnProfileButton text="Logout" color="secondary" theme={cTheme} />
+          </Grid>
+        </Grid>
       </Drawer>
     </Box>
   );

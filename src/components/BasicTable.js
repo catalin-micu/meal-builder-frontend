@@ -7,23 +7,68 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
+import SearchIcon from "@material-ui/icons/Search";
+import { IconButton, Box } from "@material-ui/core";
+import LocationCityRoundedIcon from "@material-ui/icons/LocationCityRounded";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  rowText: {
+    color: "#695f55",
+    fontFamily: "Times New Roman",
+    fontSize: "18px",
+  },
+  rowText2: {
+    color: "#695f55",
+    fontFamily: "Times New Roman",
+    fontSize: "13px",
+    display: "flex",
+    alignItems: "end",
+    flexWrap: "wrap",
+  },
+  rowText3: {
+    color: "#58be36",
+    textShadow: "1px 0 #000",
+    fontFamily: "Times New Roman",
+    fontSize: "13px",
+  },
+  rowText4: {
+    color: "#cd4f52",
+    textShadow: "1px 0 #000",
+    fontFamily: "Times New Roman",
+    fontSize: "13px",
+  },
+  searchB: {
+    paddingTop: "50px",
+  },
+  iconAvatar: {
+    padding: "0px",
+    margin: "0px",
+  },
+  avatar: {
+    width: "60px",
+    height: "60px",
+    borderRadius: "5px",
+  },
 });
 
 var food = [
-  { name: "Pizza", calories: 200, fat: 6.0, carbs: 24, protein: 4.0 },
-  { name: "Hot Dog", calories: 300, fat: 6.0, carbs: 24, protein: 4.0 },
-  { name: "Burger", calories: 400, fat: 6.0, carbs: 24, protein: 4.0 },
-  { name: "Hamburger", calories: 500, fat: 6.0, carbs: 24, protein: 4.0 },
-  { name: "Fries", calories: 600, fat: 6.0, carbs: 24, protein: 4.0 },
-  { name: "Ice Creamm", calories: 700, fat: 6.0, carbs: 24, protein: 4.0 },
-  { name: "Ceafa", calories: 350, fat: 23.0, carbs: 24, protein: 4.0 },
-  { name: "Pui", calories: 100, fat: 341.0, carbs: 24, protein: 4.0 },
-  { name: "Pork", calories: 2500, fat: 11.0, carbs: 24, protein: 4.0 },
+  {
+    avatar: "images/ujohn.png",
+    name: "Uncle John",
+    city: "Bucuresti",
+    provides_cm: true,
+    provides_sd: false,
+  },
+  {
+    avatar: "images/pbonita.png",
+    name: "Pizza Bonita",
+    city: "Bucuresti",
+    provides_cm: true,
+    provides_sd: true,
+  },
 ];
 
 export default function BasicTable() {
@@ -47,6 +92,8 @@ export default function BasicTable() {
     <>
       <br />
       <SearchBar
+        placeholder="Search a restaurant..."
+        searchIcon={<SearchIcon style={{ color: "#eea42b" }} />}
         value={searched}
         onChange={(searchVal) => requestSearch(searchVal)}
         onCancelSearch={() => cancelSearch()}
@@ -58,13 +105,104 @@ export default function BasicTable() {
             <TableBody>
               {rows.map((row) => (
                 <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
+                  <TableCell />
+                  <TableCell />
+                  <TableCell />
+                  <TableCell>
+                    <IconButton className={classes.iconAvatar}>
+                      <div className={classes.avatar}>
+                        <img
+                          className={classes.avatar}
+                          src={process.env.PUBLIC_URL + row.avatar}
+                        />
+                      </div>
+                    </IconButton>
                   </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+                  <TableCell />
+                  <TableCell />
+                  <TableCell component="th" scope="row" align="center">
+                    <text className={classes.rowText}>{row.name}</text>
+                  </TableCell>
+                  <TableCell />
+                  <TableCell />
+                  <TableCell />
+                  <TableCell />
+                  <TableCell />
+                  <TableCell />
+                  <TableCell align="center">
+                    <text className={classes.rowText2}>
+                      <LocationCityRoundedIcon />
+                      &ensp;{row.city}
+                    </text>
+                  </TableCell>
+                  <TableCell align="center">
+                    {row.provides_cm ? (
+                      <Box
+                        component="span"
+                        sx={{
+                          p: 1,
+                          border: "1px solid grey",
+                          borderColor: "#58be36",
+                          backgroundColor: "rgba(0,255,0,0.2)",
+                          borderRadius: "25px",
+                        }}
+                      >
+                        <text className={classes.rowText3}>
+                          provides custom meals
+                        </text>
+                      </Box>
+                    ) : (
+                      <Box
+                        component="span"
+                        sx={{
+                          p: 1,
+                          border: "1px solid grey",
+                          borderColor: "#cd4f52",
+                          backgroundColor: "rgba(255,0,0,0.2)",
+                          borderRadius: "25px",
+                        }}
+                      >
+                        <text className={classes.rowText4}>
+                          doesn't provide custom meals
+                        </text>
+                      </Box>
+                    )}
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    {/* TODO MODULARISATION*/}
+                    {row.provides_sd ? (
+                      <Box
+                        component="span"
+                        sx={{
+                          p: 1,
+                          border: "1px solid grey",
+                          borderColor: "#58be36",
+                          backgroundColor: "rgba(0,255,0,0.2)",
+                          borderRadius: "25px",
+                        }}
+                      >
+                        <text className={classes.rowText3}>
+                          provides scheduled delivery
+                        </text>
+                      </Box>
+                    ) : (
+                      <Box
+                        component="span"
+                        sx={{
+                          p: 1,
+                          border: "1px solid grey",
+                          borderColor: "#cd4f52",
+                          backgroundColor: "rgba(255,0,0,0.2)",
+                          borderRadius: "25px",
+                        }}
+                      >
+                        <text className={classes.rowText4}>
+                          doesn't provide scheduled delivery
+                        </text>
+                      </Box>
+                    )}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
