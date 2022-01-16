@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import "../css/HomePage.css";
-=======
 import "../css/Login.css";
->>>>>>> 05ce1a4 (fixed register and login designs)
 import { Grid, TextField } from "@material-ui/core";
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer";
@@ -93,7 +89,7 @@ const Login = () => {
   }
 
   return (
-    <div className="login" style={{ marginTop: "10%", width: "300px" }}>
+    <div className="login">
       <div className="loginFieldGroup">
         <Grid
           container
