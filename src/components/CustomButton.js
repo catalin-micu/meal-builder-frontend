@@ -1,12 +1,12 @@
-import React from "react";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(1),
-    border: "1.5px solid",
+    border: '1.5px solid'
   },
 }));
 
@@ -21,15 +21,8 @@ export default function CustomButton(props) {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Button
-          variant="outlined"
-          color={color}
-          className={classes.root}
-          component={Link}
-          to={url}
-          onClick={action}
-        >
-          <strong> {text} </strong>
+        <Button variant="outlined" color={ color } className={classes.root} component={ Link } to={ url } onClick={ action }>
+          <strong> { text } </strong>
         </Button>
       </ThemeProvider>
     </div>
