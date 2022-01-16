@@ -1,16 +1,23 @@
 import React from "react";
+<<<<<<< HEAD
 import "../css/HomePage.css";
+=======
+import "../css/Register.css";
+>>>>>>> 05ce1a4 (fixed register and login designs)
 import { Grid, TextField } from "@material-ui/core";
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer";
 import { green } from "@material-ui/core/colors";
 import { createTheme } from "@material-ui/core/styles";
 import logo from "../logo.jpeg";
+<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
 
 import { IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
+=======
+>>>>>>> 05ce1a4 (fixed register and login designs)
 
 const theme = createTheme({
   palette: {

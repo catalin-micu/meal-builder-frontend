@@ -1,3 +1,34 @@
-footer {
-    bottom: 0px;
+.flexbox-container {
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+}
+
+.flexbox-item {
+  width: auto;
+}
+
+.flexbox-item-1 {
+  margin-left: 27%;
+  margin-top: 13%;
+}
+
+.flexbox-item-2 {
+  margin-right: 33%;
+  margin-top: 7%;
+}
+
+.homeImage {
+  border-radius: 50px;
+  box-shadow: 5px -5px 6px -6px #695f55;
+  border-bottom: 5px solid #695f55;
+  border-top: 5px solid #695f55;
+}
+
+.motivational-text {
+  font-size: 12px;
+  font-family: Copperplate, Papyrus, fantasy;
+  color: #695f55;
 }

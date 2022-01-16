@@ -1,60 +1,13 @@
-div.background {
-  background-color: #7a7d7d;
-  color: white;
-
-  width: 100%;
-}
-
-div.center {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-around;
-
-  height: 100vh;
-}
-
-div.wrapper {
-  background-color: #fffbfe;
-
-  border-radius: 7px;
-
-  display: flex;
-  align-items: stretch;
-  justify-content: space-around;
-
-  /*   
-  width: 30%;
-  height: 60vh;
- */
-
-  width: auto;
-  height: auto;
-}
-
-div.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: black;
-
-  margin-bottom: 20px;
-
-  font-family: "Lucida Console", "Courier New", monospace;
-  font-size: x-large;
-}
-
-div.column {
+.login {
+  min-height: 100vh;
+  text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-div.row {
-  display: flex;
-  flex-direction: row;
-}
-
-div.margin {
-  margin: 5px;
-  padding: 5px;
+.loginFieldGroup {
+  width: 350px;
+  padding-top: 5%;
 }

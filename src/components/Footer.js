@@ -16,7 +16,7 @@ const Footer = () => {
 
   function warning() {
     return (
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "200px" }}>
         <Collapse in={open}>
           <Alert
             severity="warning"
@@ -42,14 +42,21 @@ const Footer = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center",
+      }}
+    >
       {warning()}
       <BottomNavigation
-        position="fixed"
         style={{ background: "transparent", boxShadow: "none" }}
       >
         <IconButton style={{ color: "#695f55" }} disabled="true">
-          <Typography style={{ fontSize: "15px", fontFamily: "Ubuntu" }}>
+          <Typography style={{ fontSize: "15px", fontFamily: "Georgia" }}>
             © MBDed
           </Typography>
         </IconButton>
