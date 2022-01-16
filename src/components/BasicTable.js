@@ -113,7 +113,7 @@ export default function BasicTable() {
                       <div className={classes.avatar}>
                         <img
                           className={classes.avatar}
-                          src={process.env.PUBLIC_URL + row.avatar}
+                          src={'/' + row.avatar}
                         />
                       </div>
                     </IconButton>

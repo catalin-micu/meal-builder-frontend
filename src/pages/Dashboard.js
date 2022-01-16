@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme, createTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -128,11 +128,45 @@ const cTheme = createTheme({
   },
 });
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [fullName, setFullName] = useState("Razvan Bornac");
+  const [userAddresses, setUserAddresses] = useState([]);
+  const [nearbyRestaurants, setNearbyRestaurants] = useState([]);
+
+  var userEmail = props.match.params.userEmail;
+  console.log(userEmail);
+
+
+  useEffect( () => {
+    fetch("http://127.0.0.1:5000/dashboard/cities-for-logged-user", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({"email": userEmail}),
+  }).then( (response) => response.json().then(json => setUserAddresses(json)));
+
+  fetch("http://127.0.0.1:5000/dashboard/nearby-restaurants", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({"city": 'bucuresti'}),
+  }).then( (response) => response.json().then(json => setNearbyRestaurants(json)));
+
+  }, []);
+  console.log(userAddresses);
+
+
+
+  // useEffect( () => {
+  //   fetch("http://127.0.0.1:5000/dashboard/nearby-restaurants", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({"city": 'bucuresti'}),
+  // }).then( (response) => response.json().then(json => setNearbyRestaurants(json)));
+  // }, [])
+  console.log(nearbyRestaurants);
+
 
   const handleDrawerOpen = () => {
     setOpen(true);

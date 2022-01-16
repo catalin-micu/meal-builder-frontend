@@ -34,12 +34,12 @@ const useStyles = makeStyles(() => ({
 
 const TriggerMenu = () => {
   const classes = useStyles();
-  const [buttonText, setButtonText] = React.useState("Choose your address");
+  const [buttonText, setButtonText] = React.useState("Choose your city");
 
   var addresses = [
-    "Str. Sergent Ilie Petre 102, bl.1, ap.25",
-    "Str. Sergent Ilie Petre 102, bl.1, ap.25",
-    "Str. Sergent Ilie Petre 102, bl.1, ap.25",
+    "Bucuresti",
+    "Focsani",
+    "Chiajna",
   ];
 
   const popupState = usePopupState({ variant: "popover", popupId: "demoMenu" });
@@ -73,7 +73,7 @@ const TriggerMenu = () => {
           </MenuItem>
         ))}
         <MenuItem onClick={popupState.close}>
-          <text className={classes.menuText}>+ Add new address</text>
+          <text className={classes.menuText}>+ Add new city</text>
         </MenuItem>
       </Menu>
     </div>
