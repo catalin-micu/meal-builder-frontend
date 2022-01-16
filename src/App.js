@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import RestaurantPage from "./pages/RestaurantPage";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,10 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route
+            path="/restaurant/:restaurantName"
+            component={RestaurantPage}
+          />
           <Route path="/*">{errorMessage}</Route>
         </Switch>
       </div>
