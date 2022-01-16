@@ -60,7 +60,7 @@ var food = [
     name: "Uncle John",
     city: "Bucuresti",
     provides_cm: true,
-    provides_sd: false,
+    provides_sd: true,
   },
   {
     avatar: "images/pbonita.png",
