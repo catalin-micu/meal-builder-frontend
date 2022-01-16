@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -24,8 +26,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/home" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
           <Route path="*">{errorMessage}</Route>
         </Switch>
       </div>
