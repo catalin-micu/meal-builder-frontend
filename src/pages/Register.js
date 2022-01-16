@@ -7,7 +7,6 @@ import { green } from "@material-ui/core/colors";
 import { createTheme } from "@material-ui/core/styles";
 import logo from "../logo.jpeg";
 import { useHistory } from "react-router-dom";
-
 import { IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";

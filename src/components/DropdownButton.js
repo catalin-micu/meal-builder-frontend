@@ -32,15 +32,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const TriggerMenu = () => {
+var addresses = ["Bucuresti", "Chiajna", "Focsani"];
+
+const DropdownButton = () => {
   const classes = useStyles();
   const [buttonText, setButtonText] = React.useState("Choose your city");
-
-  var addresses = [
-    "Bucuresti",
-    "Focsani",
-    "Chiajna",
-  ];
 
   const popupState = usePopupState({ variant: "popover", popupId: "demoMenu" });
 
@@ -80,4 +76,4 @@ const TriggerMenu = () => {
   );
 };
 
-export default TriggerMenu;
+export default DropdownButton;

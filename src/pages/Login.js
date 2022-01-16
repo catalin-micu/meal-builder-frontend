@@ -3,7 +3,6 @@ import "../css/Login.css";
 import { Grid, TextField } from "@material-ui/core";
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer";
-import Dots from "../components/Dots";
 import { green } from "@material-ui/core/colors";
 import { createTheme } from "@material-ui/core/styles";
 import logo from "../logo.jpeg";
@@ -12,7 +11,6 @@ import { useHistory } from "react-router-dom";
 import { IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
-// import setLoggedUser from "../App"
 
 const theme = createTheme({
   palette: {
@@ -20,12 +18,9 @@ const theme = createTheme({
   },
 });
 
-const Login = (props) => {
+const Login = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  const [invalidUsername, setInvalidUsername] = React.useState(false);
-  const [invalidPassword, setInvalidPassword] = React.useState(false);
 
   const [usernameHelper, setUsernameHelper] = React.useState("");
   const [passwordHelper, setPasswordHelper] = React.useState("");
@@ -33,8 +28,6 @@ const Login = (props) => {
   const [buttonText, setButtonText] = React.useState("Log in");
 
   const [invalidCredentials, setInvalidCredentials] = React.useState(false);
-
-  const [open, setOpen] = React.useState(false);
 
   const history = useHistory();
 
@@ -73,7 +66,6 @@ const Login = (props) => {
       passwd: password,
     };
 
-    //console.log(data1);
     var a = {};
     fetch("http://127.0.0.1:5000/users/login", {
       method: "POST",
@@ -81,30 +73,17 @@ const Login = (props) => {
       body: JSON.stringify(data1),
     }).then((response) => {
       if (response.status == "200") {
-        response.json().then(json => {
+        response.json().then((json) => {
           a = json;
         });
         setButtonText("Hello there");
-        setTimeout(() => {  history.push('/dashboard/' + a.email); }, 2500);
+        setTimeout(() => {
+          history.push("/dashboard/" + a.email);
+        }, 2500);
       } else {
         setInvalidCredentials(true);
       }
     });
-
-   
-
-    // fetch("http://127.0.0.1:5000/users/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data1),
-    // }).then(response => {
-    //   if (response.ok) {
-    //     response.json().then(json => {
-    //       a = json;
-    //     });
-    //   }
-    // });
-
   }
 
   return (

@@ -71,7 +71,7 @@ var food = [
   },
 ];
 
-export default function BasicTable() {
+export default function BasicTable(props) {
   const [rows, setRows] = useState(food);
   const [searched, setSearched] = useState("");
   const classes = useStyles();
@@ -109,11 +109,14 @@ export default function BasicTable() {
                   <TableCell />
                   <TableCell />
                   <TableCell>
-                    <IconButton className={classes.iconAvatar}>
+                    <IconButton
+                      className={classes.iconAvatar}
+                      href={`/restaurant/Uncle%20John`}
+                    >
                       <div className={classes.avatar}>
                         <img
                           className={classes.avatar}
-                          src={'/' + row.avatar}
+                          src={"/" + row.avatar}
                         />
                       </div>
                     </IconButton>
@@ -132,7 +135,8 @@ export default function BasicTable() {
                   <TableCell align="center">
                     <text className={classes.rowText2}>
                       <LocationCityRoundedIcon />
-                      &ensp;{row.city}
+                      &ensp;
+                      {row.city.charAt(0).toUpperCase() + row.city.slice(1)}
                     </text>
                   </TableCell>
                   <TableCell align="center">

@@ -53,6 +53,10 @@ const useStyles = makeStyles({
   buttonGroup: {
     marginTop: "50px",
   },
+  prodTbl: {
+    marginLeft: "20px",
+    marginRight: "20px",
+  },
 });
 
 const RestaurantPage = (props) => {
@@ -168,7 +172,9 @@ const RestaurantPage = (props) => {
           </Grid>
         </div>
       ) : (
-        <ProductsTable data={products} />
+        <div className={classes.prodTbl}>
+          <ProductsTable data={products} />
+        </div>
       )}
     </>
   );
