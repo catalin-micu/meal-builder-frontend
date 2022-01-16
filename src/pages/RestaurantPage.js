@@ -1,5 +1,5 @@
 import { Grid, Typography, Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecipeReviewCard from "../components/RecipeReviewCard";
 import uJohn from "../uJohn.png";
 import {
@@ -11,6 +11,7 @@ import CMLabel from "../components/CMLabel";
 import SDLabel from "../components/SDLabel";
 import logo from "../logo2.png";
 import { red } from "@material-ui/core/colors";
+import ProductsTable from "../components/ProductsTable";
 
 const theme = createTheme({
   palette: {
@@ -54,9 +55,41 @@ const useStyles = makeStyles({
   },
 });
 
-const RestaurantPage = () => {
-  const [restaurantName, setRestaurantName] = useState("Uncle John");
+const RestaurantPage = (props) => {
+  const [meals, setMeals] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [openMenu, setOpenMenu] = useState(true);
   const classes = useStyles();
+
+  var restaurantName = props.match.params.restaurantName;
+
+  let restaurant_name = {
+    restaurant_name: restaurantName,
+  };
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/restaurants/get-menu", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(restaurant_name),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setMeals(data);
+      });
+
+    fetch("http://127.0.0.1:5000/restaurants/get-products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(restaurant_name),
+    }).then((response) => {
+      if (response.status == 200) {
+        response.json().then((json) => setProducts(json));
+      } else {
+        console.log("This restaurant doesn't have any products.");
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -69,7 +102,9 @@ const RestaurantPage = () => {
             <div className={classes.avatar}>
               <img className={classes.avatar} src={uJohn} />
             </div>
-            <strong className={classes.restaurantNameText}>Uncle John</strong>
+            <strong className={classes.restaurantNameText}>
+              {restaurantName}
+            </strong>
           </Grid>
           <Grid item xs={12} spacing={6} align="center">
             <CMLabel provides="true" />
@@ -87,7 +122,9 @@ const RestaurantPage = () => {
                 variant="contained"
                 color="primary"
                 className={classes.cmButton}
-                onClick=""
+                onClick={() => {
+                  setOpenMenu(true);
+                }}
               >
                 <strong>Restaurant menu </strong>
               </Button>
@@ -99,7 +136,10 @@ const RestaurantPage = () => {
                 variant="contained"
                 color="primary"
                 className={classes.cmButton}
-                onClick=""
+                onClick={() => {
+                  setOpenMenu(false);
+                  // getProducts();
+                }}
               >
                 <strong>Custom meal</strong>
               </Button>
@@ -107,31 +147,29 @@ const RestaurantPage = () => {
           </Grid>
         </Grid>
       </div>
-      <div>
-        <Typography className={classes.menuTitle} noWrap align="left">
-          Menu
-        </Typography>
-        <Grid container spacing={1} justifyContent="flex-start">
-          <Grid item xs={3} spacing={1}>
-            <RecipeReviewCard />
+      {openMenu ? (
+        <div>
+          <Typography className={classes.menuTitle} noWrap align="left">
+            Menu
+          </Typography>
+          <Grid container spacing={1} justifyContent="flex-start">
+            {meals.map((meal) => (
+              <Grid item xs={3} spacing={1}>
+                <RecipeReviewCard
+                  mealName={meal.name}
+                  protein={meal.protein}
+                  carbs={meal.carbs}
+                  fat={meal.fat}
+                  calories={meal.calories}
+                  details={meal.cooking_details}
+                />
+              </Grid>
+            ))}
           </Grid>
-          <Grid item xs={3} spacing={1}>
-            <RecipeReviewCard />
-          </Grid>
-          <Grid item xs={3} spacing={1}>
-            <RecipeReviewCard />
-          </Grid>
-          <Grid item xs={3} spacing={1}>
-            <RecipeReviewCard />
-          </Grid>
-          <Grid item xs={3} spacing={1}>
-            <RecipeReviewCard />
-          </Grid>
-          <Grid item xs={3} spacing={1}>
-            <RecipeReviewCard />
-          </Grid>
-        </Grid>
-      </div>
+        </div>
+      ) : (
+        <ProductsTable data={products} />
+      )}
     </>
   );
 };

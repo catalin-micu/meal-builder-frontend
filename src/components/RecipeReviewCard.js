@@ -22,8 +22,14 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const [expanded, setExpanded] = React.useState(false);
+  var mealName = props.mealName;
+  var protein = props.protein;
+  var carbs = props.carbs;
+  var fat = props.fat;
+  var calories = props.calories;
+  var details = props.details;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -34,13 +40,23 @@ export default function RecipeReviewCard() {
       sx={{ maxWidth: 345 }}
       style={{ margin: "25px", borderRadius: "40px" }}
     >
-      <CardHeader title="Shrimp and Chorizo Paella" />
+      <CardHeader
+        title={mealName}
+        titleTypographyProps={{
+          variant: "h6",
+          align: "center",
+        }}
+      />
       <CardMedia component="img" height="194" image={incomingLogo} />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+        <Typography variant="body2" color="text.secondary" align="center">
+          Total calories : {calories}
+          <br /> <br />
+          protein: {protein}
+          <br />
+          carbs: {carbs}
+          <br />
+          fat: {fat}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -56,10 +72,7 @@ export default function RecipeReviewCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Details:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
+          <Typography paragraph>{details}</Typography>
         </CardContent>
       </Collapse>
     </Card>
