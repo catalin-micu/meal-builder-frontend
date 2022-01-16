@@ -31,15 +31,11 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-<<<<<<< HEAD
-          <Route path="*">{errorMessage}</Route>
-=======
           <Route
             path="/restaurant/:restaurantName"
             component={RestaurantPage}
           />
           <Route path="/*">{errorMessage}</Route>
->>>>>>> 9355f53 (added restaurant page)
         </Switch>
       </div>
     </Router>
