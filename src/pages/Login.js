@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
+// import setLoggedUser from "../App"
 
 const theme = createTheme({
   palette: {
@@ -19,7 +20,7 @@ const theme = createTheme({
   },
 });
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -72,20 +73,38 @@ const Login = () => {
       passwd: password,
     };
 
-    console.log(data1);
-
+    //console.log(data1);
+    var a = {};
     fetch("http://127.0.0.1:5000/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data1),
     }).then((response) => {
       if (response.status == "200") {
+        response.json().then(json => {
+          a = json;
+        });
         setButtonText("Hello there");
-        history.push("/");
+        setTimeout(() => {  history.push('/dashboard/' + a.email); }, 2500);
       } else {
         setInvalidCredentials(true);
       }
     });
+
+   
+
+    // fetch("http://127.0.0.1:5000/users/login", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data1),
+    // }).then(response => {
+    //   if (response.ok) {
+    //     response.json().then(json => {
+    //       a = json;
+    //     });
+    //   }
+    // });
+
   }
 
   return (

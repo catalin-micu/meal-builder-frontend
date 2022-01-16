@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import RestaurantPage from "./pages/RestaurantPage";
+import React from "react";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -28,7 +29,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard/:userEmail" component={Dashboard} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route
