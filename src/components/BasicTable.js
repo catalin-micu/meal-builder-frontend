@@ -111,7 +111,7 @@ export default function BasicTable(props) {
                   <TableCell>
                     <IconButton
                       className={classes.iconAvatar}
-                      href={`/restaurant/Uncle%20John`}
+                      href={`/restaurant/${row.name}`}
                     >
                       <div className={classes.avatar}>
                         <img
