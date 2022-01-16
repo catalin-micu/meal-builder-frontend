@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import RestaurantPage from "./pages/RestaurantPage";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -30,7 +31,15 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+<<<<<<< HEAD
           <Route path="*">{errorMessage}</Route>
+=======
+          <Route
+            path="/restaurant/:restaurantName"
+            component={RestaurantPage}
+          />
+          <Route path="/*">{errorMessage}</Route>
+>>>>>>> 9355f53 (added restaurant page)
         </Switch>
       </div>
     </Router>
