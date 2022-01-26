@@ -1,5 +1,6 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
+import { IconButton } from "@material-ui/core";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {
@@ -32,16 +33,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-var addresses = ["Bucuresti", "Chiajna", "Focsani"];
-
-const DropdownButton = () => {
+const DropdownButton = (props) => {
+  var propAddresses = props.addresses;
+  const [addresses, setAddresses] = useState([]);
   const classes = useStyles();
-  const [buttonText, setButtonText] = React.useState("Choose your city");
+  const [buttonText, setButtonText] = useState("Choose your city");
 
   const popupState = usePopupState({ variant: "popover", popupId: "demoMenu" });
 
+  useEffect(() => {
+    setAddresses(propAddresses);
+  }, [propAddresses]);
+
   function handleButtonText(text) {
     setButtonText(text);
+    props.selectedCity(text);
   }
 
   return (
@@ -69,7 +75,13 @@ const DropdownButton = () => {
           </MenuItem>
         ))}
         <MenuItem onClick={popupState.close}>
-          <text className={classes.menuText}>+ Add new city</text>
+          <IconButton
+            className={classes.menuText}
+            size="small"
+            onClick={() => props.openAddressField(true)}
+          >
+            <text>+ Add new city</text>
+          </IconButton>
         </MenuItem>
       </Menu>
     </div>

@@ -99,8 +99,6 @@ const Register = () => {
       return;
     }
 
-    console.log(phone);
-
     if (rePhone.test(phone) == false) {
       setPhoneHelper("Invalid phone number");
       return;

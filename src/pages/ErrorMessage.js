@@ -9,12 +9,17 @@ const ErrorMessage = () => {
       margin: "0px auto",
       paddingTop: "20%",
     },
+    container: {
+      minHeight: "100vh",
+    },
   }));
 
   const classes = useStyles();
 
   return (
-    <h1 className={classes.root}>IT LOOKS LIKE THIS PAGE DOESN'T EXIST!</h1>
+    <div className={classes.container}>
+      <h1 className={classes.root}>IT LOOKS LIKE THIS PAGE DOESN'T EXIST!</h1>
+    </div>
   );
 };
 

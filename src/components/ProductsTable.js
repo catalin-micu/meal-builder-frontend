@@ -83,6 +83,7 @@ export default function ProductsTable(props) {
                 <TableCell align="center">Fat</TableCell>
                 <TableCell align="center">Calories</TableCell>
                 <TableCell align="center">Details</TableCell>
+                <TableCell align="center">Price</TableCell>
                 <TableCell />
               </TableRow>
             </TableHead>
@@ -111,6 +112,11 @@ export default function ProductsTable(props) {
                   <TableCell align="center">
                     <text className={classes.rowText2}>
                       {row.cooking_details}
+                    </text>
+                  </TableCell>
+                  <TableCell align="center">
+                    <text className={classes.rowText2}>
+                      {row.price} {row.currency}
                     </text>
                   </TableCell>
                   <TableCell align="center">

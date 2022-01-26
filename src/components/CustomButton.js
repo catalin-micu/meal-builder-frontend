@@ -16,6 +16,7 @@ export default function CustomButton(props) {
   var url = props.url;
   var action = props.onClick;
   var theme = props.theme;
+  var disabled = props.disabled;
   const classes = useStyles();
 
   return (
@@ -27,6 +28,7 @@ export default function CustomButton(props) {
           className={classes.root}
           component={Link}
           to={url}
+          disabled={disabled}
           onClick={action}
         >
           <strong> {text} </strong>

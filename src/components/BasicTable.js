@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -54,30 +54,21 @@ const useStyles = makeStyles({
   },
 });
 
-var food = [
-  {
-    avatar: "images/ujohn.png",
-    name: "Uncle John",
-    city: "Bucuresti",
-    provides_cm: true,
-    provides_sd: true,
-  },
-  {
-    avatar: "images/pbonita.png",
-    name: "Pizza Bonita",
-    city: "Bucuresti",
-    provides_cm: true,
-    provides_sd: true,
-  },
-];
-
 export default function BasicTable(props) {
-  const [rows, setRows] = useState(food);
+  var restaurants = props.data;
+  var token = props.token;
+  const [rows, setRows] = useState([]);
   const [searched, setSearched] = useState("");
+  const [validToken, setValidToken] = useState("");
   const classes = useStyles();
 
+  useEffect(() => {
+    setRows(restaurants);
+    setValidToken(token);
+  }, [restaurants, token]);
+
   const requestSearch = (searchedVal) => {
-    const filteredRows = food.filter((row) => {
+    const filteredRows = restaurants.filter((row) => {
       return row.name.toLowerCase().includes(searchedVal.toLowerCase());
     });
     setRows(filteredRows);
@@ -87,6 +78,28 @@ export default function BasicTable(props) {
     setSearched("");
     requestSearch(searched);
   };
+
+  function changeAvatar(restaurant) {
+    if (restaurant === "Uncle John") {
+      return (
+        <div className={classes.avatar}>
+          <img className={classes.avatar} src={"/images/ujohn.png"} />
+        </div>
+      );
+    } else if (restaurant === "Pizza Bonita") {
+      return (
+        <div className={classes.avatar}>
+          <img className={classes.avatar} src={"/images/pbonita.png"} />
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.avatar}>
+          <img className={classes.avatar} src={"/images/nologo.png"} />
+        </div>
+      );
+    }
+  }
 
   return (
     <>
@@ -104,27 +117,24 @@ export default function BasicTable(props) {
           <Table className={classes.table} aria-label="simple table">
             <TableBody>
               {rows.map((row) => (
-                <TableRow key={row.name}>
+                <TableRow key={row.restaurant_name}>
                   <TableCell />
                   <TableCell />
                   <TableCell />
                   <TableCell>
                     <IconButton
                       className={classes.iconAvatar}
-                      href={`/restaurant/${row.name}`}
+                      href={`/restaurant/${validToken}/${row.restaurant_name}`}
                     >
-                      <div className={classes.avatar}>
-                        <img
-                          className={classes.avatar}
-                          src={"/" + row.avatar}
-                        />
-                      </div>
+                      {changeAvatar(row.restaurant_name)}
                     </IconButton>
                   </TableCell>
                   <TableCell />
                   <TableCell />
                   <TableCell component="th" scope="row" align="center">
-                    <text className={classes.rowText}>{row.name}</text>
+                    <text className={classes.rowText}>
+                      {row.restaurant_name}
+                    </text>
                   </TableCell>
                   <TableCell />
                   <TableCell />
@@ -140,7 +150,7 @@ export default function BasicTable(props) {
                     </text>
                   </TableCell>
                   <TableCell align="center">
-                    {row.provides_cm ? (
+                    {row.provides_custom_meals ? (
                       <Box
                         component="span"
                         sx={{
@@ -175,7 +185,7 @@ export default function BasicTable(props) {
                   <TableCell align="center">
                     {" "}
                     {/* TODO MODULARISATION*/}
-                    {row.provides_sd ? (
+                    {row.provides_scheduled_delivery ? (
                       <Box
                         component="span"
                         sx={{

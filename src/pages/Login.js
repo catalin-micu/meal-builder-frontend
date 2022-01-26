@@ -72,13 +72,13 @@ const Login = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data1),
     }).then((response) => {
-      if (response.status == "200") {
+      if (response.status == "201") {
         response.json().then((json) => {
           a = json;
         });
         setButtonText("Hello there");
         setTimeout(() => {
-          history.push("/dashboard/" + a.email);
+          history.push("/dashboard/" + a.token);
         }, 2500);
       } else {
         setInvalidCredentials(true);

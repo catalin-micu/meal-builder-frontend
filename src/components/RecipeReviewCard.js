@@ -30,6 +30,8 @@ export default function RecipeReviewCard(props) {
   var fat = props.fat;
   var calories = props.calories;
   var details = props.details;
+  var price = props.price;
+  var currency = props.currency;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -57,6 +59,11 @@ export default function RecipeReviewCard(props) {
           carbs: {carbs}
           <br />
           fat: {fat}
+          <br />
+          <br />
+          <strong>
+            Price: {price} {currency}
+          </strong>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

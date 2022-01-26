@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 
@@ -18,7 +18,12 @@ const useStyles = makeStyles({
 });
 
 const SDLabel = (props) => {
-  const [provides, setProvides] = useState(props.provides);
+  var provide = props.provides;
+  const [provides, setProvides] = useState();
+
+  useEffect(() => {
+    setProvides(provide);
+  }, [provide]);
 
   const classes = useStyles();
   return (
