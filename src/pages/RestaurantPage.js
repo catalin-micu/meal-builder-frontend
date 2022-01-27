@@ -15,6 +15,12 @@ import { Redirect } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Cart from "./Cart";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import cheeseburger from "../cheeseburger.jpg";
+import bigsh from "../bigsh.jpg";
+import crispy from "../crispy.jpg";
+import pizzat from "../pizzat.jpg";
+import pizzad from "../pizzad.jpg";
+import paste from "../paste.jpg";
 
 const theme = createTheme({
   palette: {
@@ -164,6 +170,22 @@ const RestaurantPage = (props) => {
     }
   }
 
+  function mealImage(name) {
+    if (name == "Cheeseburger Menu") {
+      return cheeseburger;
+    } else if (name == "BIG SHAORMA") {
+      return bigsh;
+    } else if (name == "Crispy Menu") {
+      return crispy;
+    } else if (name == "Pizza Taraneasca") {
+      return pizzat;
+    } else if (name == "Pizza Diavollo") {
+      return pizzad;
+    } else {
+      return paste;
+    }
+  }
+
   return (
     <>
       {authorized ? (
@@ -183,7 +205,14 @@ const RestaurantPage = (props) => {
                 Back
               </Button>
             </ThemeProvider>
-
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginRight: "20px",
+            }}
+          >
             <IconButton
               color="inherit"
               edge="end"
@@ -259,6 +288,7 @@ const RestaurantPage = (props) => {
                       details={meal.cooking_details}
                       price={meal.price}
                       currency={meal.currency}
+                      image={mealImage(meal.name)}
                     />
                   </Grid>
                 ))}
@@ -269,7 +299,11 @@ const RestaurantPage = (props) => {
               <ProductsTable data={products} />
             </div>
           )}
-          <Cart openPopup={openPopup} setOpenPopup={setOpenPopup} />
+          <Cart
+            openPopup={openPopup}
+            setOpenPopup={setOpenPopup}
+            token={token}
+          />
         </>
       ) : (
         <Redirect to="/login" />

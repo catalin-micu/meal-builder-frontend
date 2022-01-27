@@ -32,6 +32,7 @@ export default function RecipeReviewCard(props) {
   var details = props.details;
   var price = props.price;
   var currency = props.currency;
+  console.log(props.image);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -49,7 +50,7 @@ export default function RecipeReviewCard(props) {
           align: "center",
         }}
       />
-      <CardMedia component="img" height="194" image={incomingLogo} />
+      <CardMedia component="img" height="194" image={props.image} />
       <CardContent>
         <Typography variant="body2" color="text.secondary" align="center">
           Total calories : {calories}
