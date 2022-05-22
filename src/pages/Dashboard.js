@@ -239,7 +239,7 @@ export default function Dashboard() {
   }
 
   function saveNewCity() {
-    let addr = addresses + "//ceva-" + newCity;
+    let addr = addresses + "-//ceva-" + newCity;
     let data = {
       email: email,
       preferred_addresses: addr,
