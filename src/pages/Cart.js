@@ -12,6 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Alert from "@material-ui/lab/Alert";
 import { useHistory } from "react-router-dom";
 import StripeContainer from "../components/StripeContainer";
+import RemoveIcon from "@material-ui/icons/Remove";
 
 export default function Cart(props) {
   const { openPopup, setOpenPopup } = props;
@@ -19,11 +20,22 @@ export default function Cart(props) {
   const [cardPayment, setCardPayment] = React.useState(false);
   const [successfullySent, setSuccessfullySent] = React.useState(false);
 
+  var cart_list = [];
+  if (JSON.parse(localStorage.getItem("cart"))) {
+    cart_list = JSON.parse(localStorage.getItem("cart"));
+  }
+
   const history = useHistory();
 
   const handleClose = () => {
     setOpenPopup(false);
   };
+
+  function arrayRemove(arr, value) {
+    return arr.filter(function (geeks) {
+      return geeks != value;
+    });
+  }
 
   return (
     <Dialog open={openPopup} onClose={handleClose}>
@@ -70,6 +82,26 @@ export default function Cart(props) {
         >
           Cart
         </Typography>
+        {cart_list.map((txt) => (
+          <text>
+            {txt}
+            <IconButton
+              onClick={() => {
+                cart_list = arrayRemove(cart_list, txt);
+                localStorage.setItem("cart", JSON.stringify(cart_list));
+                setTimeout(() => {
+                  setOpenPopup(false);
+                }, 250);
+                setTimeout(() => {
+                  setOpenPopup(true);
+                }, 250);
+              }}
+            >
+              <RemoveIcon color="secondary" />
+            </IconButton>
+            <br></br>
+          </text>
+        ))}
         <Grid container spacing={2}>
           <Grid item xs={12} spacing={6} align="center">
             <text
@@ -95,7 +127,7 @@ export default function Cart(props) {
                 onClick={() => {
                   setSuccessfullySent(true);
                   setTimeout(() => {
-                    history.push("/dashboard/" + props.token);
+                    history.push("/dashboard");
                   }, 2500);
                 }}
               >

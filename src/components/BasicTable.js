@@ -124,7 +124,7 @@ export default function BasicTable(props) {
                   <TableCell>
                     <IconButton
                       className={classes.iconAvatar}
-                      href={`/restaurant/${validToken}/${row.restaurant_name}`}
+                      href={`/restaurant/${row.restaurant_name}`}
                     >
                       {changeAvatar(row.restaurant_name)}
                     </IconButton>

@@ -138,7 +138,7 @@ const cTheme = createTheme({
   },
 });
 
-export default function Dashboard(props) {
+export default function Dashboard() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -153,7 +153,7 @@ export default function Dashboard(props) {
   const [email, setEmail] = useState("");
   const [newCity, setNewCity] = useState("");
 
-  var token = props.match.params.token;
+  const token = sessionStorage.getItem("token");
 
   const authorize = (e) => {
     setAuthorized(e);
@@ -165,38 +165,50 @@ export default function Dashboard(props) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ email: email }),
-      }).then((response) =>
-        response.json().then((json) => setUserAddresses(json))
-      );
+      }).then((response) => {
+        if (response.status === 200) {
+          response.json().then((json) => setUserAddresses(json));
+        } else if (response.status === 401) {
+          authorize(false);
+        }
+      });
 
       fetch("http://127.0.0.1:5000/dashboard/nearby-restaurants", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ city: city }),
-      }).then((response) =>
-        response.json().then((json) => setNearbyRestaurants(json))
-      );
+      }).then((response) => {
+        if (response.status === 200) {
+          response.json().then((json) => setNearbyRestaurants(json));
+        } else if (response.status === 401) {
+          authorize(false);
+        }
+      });
 
       fetch("http://127.0.0.1:5000/users/get-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ email: email }),
-      }).then((response) =>
-        response.json().then((json) => {
-          setFullName(json.full_name);
-          setAddresses(json.preferred_addresses);
-          setEmail(json.email);
-        })
-      );
+      }).then((response) => {
+        if (response.status === 200) {
+          response.json().then((json) => {
+            setFullName(json.full_name);
+            setAddresses(json.preferred_addresses);
+            setEmail(json.email);
+          });
+        } else {
+          authorize(false);
+        }
+      });
     };
 
     fetch("http://127.0.0.1:5000/users/decode-token", {
@@ -208,7 +220,7 @@ export default function Dashboard(props) {
         setValidToken(token);
         authorize(true);
         response.json().then((json) => fetchAll(json.email, selectedCity));
-      } else {
+      } else if (response.status === 401) {
         authorize(false);
       }
     });
@@ -246,6 +258,23 @@ export default function Dashboard(props) {
     });
   }
 
+  function logout() {
+    let data = {
+      email: email,
+    };
+
+    fetch("http://127.0.0.1:5000/users/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      if (response.status == "200") {
+        sessionStorage.removeItem("token");
+        <Redirect to="/login" />;
+      }
+    });
+  }
+
   return (
     <>
       {authorized ? (
@@ -260,7 +289,9 @@ export default function Dashboard(props) {
             <Toolbar>
               <div>
                 <Typography noWrap align="left">
-                  <img src={logo} className={classes.logo} alt="logo" />
+                  <a href="/">
+                    <img src={logo} className={classes.logo} alt="logo" />
+                  </a>
                 </Typography>
               </div>
               <Typography noWrap className={classes.title} align="top" />
@@ -367,13 +398,14 @@ export default function Dashboard(props) {
                   text="Account details"
                   color="primary"
                   theme={cTheme}
-                  url={`/account-details/${token}`}
+                  url={`/account-details`}
                 />
                 <OnProfileButton
                   text="Logout"
                   color="secondary"
                   theme={cTheme}
                   url="/login"
+                  onClick={() => logout()}
                 />
               </Grid>
             </Grid>

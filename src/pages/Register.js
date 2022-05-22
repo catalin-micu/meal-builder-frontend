@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/Register.css";
 import { Grid, TextField } from "@material-ui/core";
 import CustomButton from "../components/CustomButton";
@@ -61,6 +61,14 @@ const Register = () => {
   function onPasswordConfChange() {
     setPasswordConf(document.getElementById("cpassword-field").value);
   }
+
+  const token = sessionStorage.getItem("token");
+
+  useEffect(() => {
+    if (token && token != "" && token != undefined) {
+      history.push("/dashboard");
+    }
+  });
 
   function onClickSignUp() {
     clearErrors();

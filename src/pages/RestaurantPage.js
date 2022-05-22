@@ -24,7 +24,7 @@ import paste from "../paste.jpg";
 
 const theme = createTheme({
   palette: {
-    primary: red,
+    secondary: red,
   },
 });
 
@@ -81,9 +81,12 @@ const RestaurantPage = (props) => {
   const [scheduledDelivery, setScheduledDelivery] = useState(true);
   const classes = useStyles();
   const [openPopup, setOpenPopup] = useState(false);
+  const [cart, setCart] = useState([]);
+
+  var cartList = [];
 
   var restaurantName = props.match.params.restaurantName;
-  var token = props.match.params.token;
+  var token = sessionStorage.getItem("token");
 
   let restaurant_name = {
     restaurant_name: restaurantName,
@@ -125,7 +128,7 @@ const RestaurantPage = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify(restaurant),
       }).then((response) =>
@@ -188,23 +191,22 @@ const RestaurantPage = (props) => {
 
   return (
     <>
+      {cartList.push(cart)}
       {authorized ? (
         <>
           <div className={classes.logo}>
             <img src={logo} alt="logo" />
             <br />
-            <ThemeProvider theme={theme}>
-              <Button
-                variant="contained"
-                size="small"
-                className={classes.arrow}
-                href={`/dashboard/${token}`}
-                color="primary"
-                startIcon={<ArrowBackIosIcon />}
-              >
-                Back
-              </Button>
-            </ThemeProvider>
+            <Button
+              variant="contained"
+              size="small"
+              className={classes.arrow}
+              href={`/dashboard/${token}`}
+              color="secondary"
+              startIcon={<ArrowBackIosIcon />}
+            >
+              Back
+            </Button>
           </div>
           <div
             style={{
@@ -213,11 +215,7 @@ const RestaurantPage = (props) => {
               marginRight: "20px",
             }}
           >
-            <IconButton
-              color="inherit"
-              edge="end"
-              onClick={() => setOpenPopup(true)}
-            >
+            <IconButton edge="end" onClick={() => setOpenPopup(true)}>
               <ShoppingCartIcon style={{ color: "#cd4f52" }} />
             </IconButton>
           </div>
@@ -242,32 +240,28 @@ const RestaurantPage = (props) => {
                 spacing={6}
                 align="center"
               >
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.cmButton}
-                    onClick={() => {
-                      setOpenMenu(true);
-                    }}
-                  >
-                    <strong>Restaurant menu </strong>
-                  </Button>
-                </ThemeProvider>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.cmButton}
+                  onClick={() => {
+                    setOpenMenu(true);
+                  }}
+                >
+                  <strong>Restaurant menu </strong>
+                </Button>
               </Grid>
               <Grid item xs={12} spacing={6} align="center">
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.cmButton}
-                    onClick={() => {
-                      setOpenMenu(false);
-                    }}
-                  >
-                    <strong>Custom meal</strong>
-                  </Button>
-                </ThemeProvider>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.cmButton}
+                  onClick={() => {
+                    setOpenMenu(false);
+                  }}
+                >
+                  <strong>Custom meal</strong>
+                </Button>
               </Grid>
             </Grid>
           </div>
@@ -289,6 +283,7 @@ const RestaurantPage = (props) => {
                       price={meal.price}
                       currency={meal.currency}
                       image={mealImage(meal.name)}
+                      changeCart={setCart}
                     />
                   </Grid>
                 ))}
@@ -296,13 +291,14 @@ const RestaurantPage = (props) => {
             </div>
           ) : (
             <div className={classes.prodTbl}>
-              <ProductsTable data={products} />
+              <ProductsTable data={products} changeCart={setCart} />
             </div>
           )}
           <Cart
             openPopup={openPopup}
             setOpenPopup={setOpenPopup}
             token={token}
+            cart={cartList}
           />
         </>
       ) : (

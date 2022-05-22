@@ -43,9 +43,7 @@ const AccountDetails = (props) => {
   const [disabledButton, setDisabledButton] = React.useState(true);
   const [authorized, setAuthorized] = React.useState(true);
 
-  var token = props.match.params.token;
-
-  const history = useHistory();
+  const token = sessionStorage.getItem("token");
 
   React.useEffect(() => {
     const getUser = (email) => {
@@ -53,7 +51,7 @@ const AccountDetails = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ email: email }),
       }).then((response) =>
@@ -65,7 +63,9 @@ const AccountDetails = (props) => {
           setCardExpiry(json.card_expiry);
           setCardCvv(json.cvv);
           setCardNumber(json.card_nb);
-          setSecretCvv("***");
+          if (json.card_nb) {
+            setSecretCvv("***");
+          }
           setSecretCardNumber("************" + json.card_nb.slice(-4));
         })
       );

@@ -31,12 +31,12 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/dashboard/:token" component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/account-details/:token" component={AccountDetails} />
+          <Route path="/account-details" component={AccountDetails} />
           <Route
-            path="/restaurant/:token/:restaurantName"
+            path="/restaurant/:restaurantName"
             component={RestaurantPage}
           />
           <Route path="/*" component={ErrorMessage} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer";
@@ -7,6 +7,7 @@ import { createTheme } from "@material-ui/core/styles";
 import logo from "../logo.jpeg";
 import homepage_photo from "../homepage_photo.png";
 import "../css/HomePage.css";
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -16,6 +17,15 @@ const theme = createTheme({
 });
 
 const HomePage = () => {
+  const history = useHistory();
+  const token = sessionStorage.getItem("token");
+
+  useEffect(() => {
+    if (token && token != "" && token != undefined) {
+      history.push("/dashboard");
+    }
+  });
+
   return (
     <div style={{ minHeight: "100vh" }}>
       <div className="flexbox-container">

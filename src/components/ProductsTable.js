@@ -59,6 +59,11 @@ export default function ProductsTable(props) {
     requestSearch(searched);
   };
 
+  var cart_list = [];
+  if (JSON.parse(localStorage.getItem("cart"))) {
+    cart_list = JSON.parse(localStorage.getItem("cart"));
+  }
+
   return (
     <>
       <br />
@@ -120,7 +125,14 @@ export default function ProductsTable(props) {
                     </text>
                   </TableCell>
                   <TableCell align="center">
-                    <IconButton>
+                    <IconButton
+                      onClick={() => {
+                        cart_list.push(
+                          row.name + " - " + row.price + " " + row.currency
+                        );
+                        localStorage.setItem("cart", JSON.stringify(cart_list));
+                      }}
+                    >
                       <AddIcon />
                     </IconButton>
                   </TableCell>

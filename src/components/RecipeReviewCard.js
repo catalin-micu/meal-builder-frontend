@@ -9,7 +9,7 @@ import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import incomingLogo from "../mancare1.jpg";
+import AddIcon from "@material-ui/icons/Add";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,7 +32,11 @@ export default function RecipeReviewCard(props) {
   var details = props.details;
   var price = props.price;
   var currency = props.currency;
-  console.log(props.image);
+
+  var cart_list = [];
+  if (JSON.parse(localStorage.getItem("cart"))) {
+    cart_list = JSON.parse(localStorage.getItem("cart"));
+  }
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -65,6 +69,16 @@ export default function RecipeReviewCard(props) {
           <strong>
             Price: {price} {currency}
           </strong>
+          <div>
+            <IconButton
+              onClick={() => {
+                cart_list.push(mealName + " - " + price + " " + currency);
+                localStorage.setItem("cart", JSON.stringify(cart_list));
+              }}
+            >
+              <AddIcon />
+            </IconButton>
+          </div>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

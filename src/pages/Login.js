@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/Login.css";
 import { Grid, TextField } from "@material-ui/core";
 import CustomButton from "../components/CustomButton";
@@ -39,6 +39,14 @@ const Login = () => {
     setPassword(document.getElementById("password-field").value);
   }
 
+  const token = sessionStorage.getItem("token");
+
+  useEffect(() => {
+    if (token && token != "" && token != undefined) {
+      history.push("/dashboard");
+    }
+  });
+
   function onClickLogin() {
     let reUsername = /\S+@\S+\.\S+/;
 
@@ -72,13 +80,14 @@ const Login = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data1),
     }).then((response) => {
-      if (response.status == "201") {
+      if (response.status == "200") {
         response.json().then((json) => {
           a = json;
         });
         setButtonText("Hello there");
         setTimeout(() => {
-          history.push("/dashboard/" + a.token);
+          sessionStorage.setItem("token", a.token);
+          history.push("/dashboard");
         }, 2500);
       } else {
         setInvalidCredentials(true);
