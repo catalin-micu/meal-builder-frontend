@@ -401,6 +401,12 @@ export default function Dashboard() {
                   url={`/account-details`}
                 />
                 <OnProfileButton
+                  text="Calories calculator"
+                  color="primary"
+                  theme={cTheme}
+                  url="/calories-calculator"
+                />
+                <OnProfileButton
                   text="Logout"
                   color="secondary"
                   theme={cTheme}

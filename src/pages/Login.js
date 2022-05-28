@@ -56,7 +56,7 @@ const Login = () => {
     }
 
     if (reUsername.test(username) == false) {
-      setUsernameHelper("Invalid Email");
+      setUsernameHelper("format: example@gmail.com");
       return;
     }
 

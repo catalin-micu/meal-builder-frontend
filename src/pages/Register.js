@@ -96,7 +96,7 @@ const Register = () => {
     }
 
     if (reEmail.test(email) == false) {
-      setEmailHelper("Invalid email format");
+      setEmailHelper("format: example@gmail.com");
       return;
     }
 
@@ -108,7 +108,7 @@ const Register = () => {
     }
 
     if (rePhone.test(phone) == false) {
-      setPhoneHelper("Invalid phone number");
+      setPhoneHelper("format: 07********");
       return;
     }
 

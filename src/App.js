@@ -9,6 +9,7 @@ import AccountDetails from "./pages/AccountDetails";
 import RestaurantPage from "./pages/RestaurantPage";
 import React from "react";
 import ErrorMessage from "./pages/ErrorMessage";
+import CaloriesCalculatorPage from "./pages/CaloriesCalculatorPage";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -38,6 +39,10 @@ function App() {
           <Route
             path="/restaurant/:restaurantName"
             component={RestaurantPage}
+          />
+          <Route
+            path="/calories-calculator"
+            component={CaloriesCalculatorPage}
           />
           <Route path="/*" component={ErrorMessage} />
         </Switch>
