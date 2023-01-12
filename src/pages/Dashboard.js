@@ -239,7 +239,7 @@ export default function Dashboard() {
   }
 
   function saveNewCity() {
-    let addr = addresses + "-//ceva-" + newCity;
+    let addr = addresses + "//" + newCity;
     let data = {
       email: email,
       preferred_addresses: addr,
@@ -319,7 +319,7 @@ export default function Dashboard() {
                 </text>
               </div>
               <div className={classes.dropDwnDiv}>
-                <text className={classes.cAddress}>Current city:</text>
+                <text className={classes.cAddress}>Current address:</text>
                 <DropdownButton
                   addresses={userAddresses}
                   selectedCity={setSelectedCity}
@@ -331,7 +331,7 @@ export default function Dashboard() {
                     <TextField
                       id="address-field"
                       color="secondary"
-                      label="New city"
+                      label="New address"
                       size="small"
                       variant="outlined"
                       required="true"

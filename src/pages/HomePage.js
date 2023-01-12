@@ -30,7 +30,9 @@ const HomePage = () => {
     <div style={{ minHeight: "100vh" }}>
       <div className="flexbox-container">
         <div className="flexbox-item flexbox-item-1">
-          <img className="homeImage" src={homepage_photo} alt="homepage" />
+          <div className="floating">
+            <img className="homeImage" src={homepage_photo} alt="homepage" />
+          </div>
         </div>
         <div className="flexbox-item flexbox-item-2">
           <div className="homepageButtonGroup">
