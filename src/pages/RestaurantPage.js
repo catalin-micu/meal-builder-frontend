@@ -96,6 +96,8 @@ const RestaurantPage = (props) => {
     name: restaurantName,
   };
 
+  // localStorage.setItem("total", 0);
+
   const authorize = (e) => {
     setAuthorized(e);
   };

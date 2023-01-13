@@ -130,6 +130,11 @@ export default function ProductsTable(props) {
                         cart_list.push(
                           row.name + " - " + row.price + " " + row.currency
                         );
+                        localStorage.setItem(
+                          "total",
+                          parseInt(localStorage.getItem("total") || 0) +
+                            parseInt(row.price)
+                        );
                         localStorage.setItem("cart", JSON.stringify(cart_list));
                       }}
                     >

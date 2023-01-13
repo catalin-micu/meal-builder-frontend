@@ -89,6 +89,11 @@ export default function Cart(props) {
               onClick={() => {
                 cart_list = arrayRemove(cart_list, txt);
                 localStorage.setItem("cart", JSON.stringify(cart_list));
+                localStorage.setItem(
+                  "total",
+                  parseInt(localStorage.getItem("total")) -
+                    parseInt(txt.match(/\d+/))
+                );
                 setTimeout(() => {
                   setOpenPopup(false);
                 }, 250);
@@ -102,6 +107,14 @@ export default function Cart(props) {
             <br></br>
           </text>
         ))}
+        {
+          <strong>
+            <br />
+            <br />
+            TOTAL: {localStorage.getItem("total") || 0} RON <br />
+            <br />
+          </strong>
+        }
         <Grid container spacing={2}>
           <Grid item xs={12} spacing={6} align="center">
             <text
@@ -137,11 +150,16 @@ export default function Cart(props) {
           ) : null}
           {cardPayment ? (
             <Grid item xs={12} spacing={6} align="center">
-              <StripeContainer
-                sent={setSuccessfullySent}
-                token={props.token}
-                display={setCardPayment}
-              />
+              <Button
+                color="secondary"
+                onClick={() => {
+                  setTimeout(() => {
+                    history.push("/payment");
+                  }, 2500);
+                }}
+              >
+                Pay
+              </Button>
             </Grid>
           ) : null}
         </Grid>

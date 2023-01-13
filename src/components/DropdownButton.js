@@ -37,7 +37,7 @@ const DropdownButton = (props) => {
   var propAddresses = props.addresses;
   const [addresses, setAddresses] = useState([]);
   const classes = useStyles();
-  const [buttonText, setButtonText] = useState("Choose your city");
+  const [buttonText, setButtonText] = useState("Choose your address");
 
   const popupState = usePopupState({ variant: "popover", popupId: "demoMenu" });
 
@@ -80,7 +80,7 @@ const DropdownButton = (props) => {
             size="small"
             onClick={() => props.openAddressField(true)}
           >
-            <text>+ Add new city</text>
+            <text>+ Add new address</text>
           </IconButton>
         </MenuItem>
       </Menu>

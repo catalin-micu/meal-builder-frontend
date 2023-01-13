@@ -5,11 +5,13 @@ import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import PaymentScreen from "./pages/PaymentScreen";
 import AccountDetails from "./pages/AccountDetails";
 import RestaurantPage from "./pages/RestaurantPage";
 import React from "react";
 import ErrorMessage from "./pages/ErrorMessage";
 import CaloriesCalculatorPage from "./pages/CaloriesCalculatorPage";
+import { Elements } from "@stripe/react-stripe-js";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -36,6 +38,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/account-details" component={AccountDetails} />
+          <Route path="/payment" component={PaymentScreen} />
           <Route
             path="/restaurant/:restaurantName"
             component={RestaurantPage}

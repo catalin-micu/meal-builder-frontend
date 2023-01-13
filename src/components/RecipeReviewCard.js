@@ -73,6 +73,10 @@ export default function RecipeReviewCard(props) {
             <IconButton
               onClick={() => {
                 cart_list.push(mealName + " - " + price + " " + currency);
+                localStorage.setItem(
+                  "total",
+                  parseInt(localStorage.getItem("total") || 0) + parseInt(price)
+                );
                 localStorage.setItem("cart", JSON.stringify(cart_list));
               }}
             >
