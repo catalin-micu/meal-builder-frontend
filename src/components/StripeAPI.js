@@ -1,4 +1,4 @@
-const createPaymentIntent = (options) => {
+const createPaymentIntent = (currency, amount) => {
   return window
     .fetch(`/create-payment-intent`, {
       method: "POST",
@@ -6,8 +6,8 @@ const createPaymentIntent = (options) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: 2000,
-        currency: "usd",
+        amount: amount * 100,
+        currency: currency,
       }),
     })
     .then((res) => {
@@ -18,12 +18,11 @@ const createPaymentIntent = (options) => {
       }
     })
     .then((data) => {
-      console.log(options);
       if (!data || data.error) {
         console.log("API error:", { data });
         throw new Error("PaymentIntent API Error");
       } else {
-        return data.client_secret;
+        return data.id;
       }
     });
 };
@@ -78,10 +77,32 @@ const getPublicStripeKey = (options) => {
     });
 };
 
+const confirmPaymentMBDed = (id) => {
+  return window
+    .fetch(`https://api.stripe.com/v1/payment_intents/` + id + `/confirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc",
+      },
+      body: new URLSearchParams({
+        payment_method: "pm_card_visa",
+      }),
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        return null;
+      }
+    });
+};
+
 const api = {
-  createPaymentIntent,
+  createPaymentIntent: createPaymentIntent,
   getPublicStripeKey: getPublicStripeKey,
   getProductDetails: getProductDetails,
+  confirmPaymentMBDed: confirmPaymentMBDed,
 };
 
 export default api;

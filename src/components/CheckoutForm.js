@@ -17,14 +17,12 @@ export default function CheckoutForm() {
   useEffect(() => {
     // Step 1: Fetch product details such as amount and currency from
     // API to make sure it can't be tampered with in the client.
-    api.getProductDetails().then((productDetails) => {
-      setAmount(productDetails.amount / 100);
-      setCurrency(productDetails.currency);
-    });
+    setCurrency("RON");
+    setAmount(localStorage.getItem("total"));
 
     // Step 2: Create PaymentIntent over Stripe API
     api
-      .createPaymentIntent()
+      .createPaymentIntent("RON", localStorage.getItem("total"))
       .then((clientSecret) => {
         setClientSecret(clientSecret);
       })
@@ -36,30 +34,37 @@ export default function CheckoutForm() {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     setProcessing(true);
+    localStorage.setItem("total", 0);
+    localStorage.setItem("cart", JSON.stringify([]));
 
     // Step 3: Use clientSecret from PaymentIntent and the CardElement
     // to confirm payment with stripe.confirmCardPayment()
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: ev.target.name.value,
-        },
-      },
-    });
-    console.log(payload);
+    await api
+      .confirmPaymentMBDed(clientSecret)
+      .then((payment) => {
+        setError(null);
+        setSucceeded(true);
+        setProcessing(false);
+        setMetadata(payment);
+        console.log("[PaymentIntent]", payment);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
 
-    if (payload.error) {
-      setError(`Payment failed: ${payload.error.message}`);
-      setProcessing(false);
-      console.log("[error]", payload.error);
-    } else {
-      setError(null);
-      setSucceeded(true);
-      setProcessing(false);
-      setMetadata(payload.paymentIntent);
-      console.log("[PaymentIntent]", payload.paymentIntent);
-    }
+    // if (payload.error) {
+    //   setError(`Payment failed: ${payload.error.message}`);
+    //   setProcessing(false);
+    //   console.log("[error]", payload.error);
+    //   console.log(clientSecret);
+    // } else {
+    //   setError(null);
+    //   setSucceeded(true);
+    //   setProcessing(false);
+    //   setMetadata(payload.paymentIntent);
+    //   console.log("[PaymentIntent]", payload.paymentIntent);
+    //   console.log(clientSecret);
+    // }
   };
 
   const renderSuccess = () => {
@@ -96,12 +101,12 @@ export default function CheckoutForm() {
     return (
       <form onSubmit={handleSubmit}>
         <h1>
-          {currency.toLocaleUpperCase()}{" "}
           {amount.toLocaleString(navigator.language, {
             minimumFractionDigits: 2,
           })}{" "}
+          {currency.toLocaleUpperCase()}{" "}
         </h1>
-        <h4>Pre-order the Pasha package</h4>
+        <h4>Stripe | Secure payment processing platform</h4>
 
         <div className="sr-combo-inputs">
           <div className="sr-combo-inputs-row">
@@ -140,6 +145,7 @@ export default function CheckoutForm() {
       <div className="sr-payment-form">
         <div className="sr-form-row" />
         {succeeded ? renderSuccess() : renderForm()}
+        {/* {renderForm()} */}
       </div>
     </div>
   );
